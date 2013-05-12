@@ -66,11 +66,11 @@ def recieveMessage():
 def nextInQueue():
     """Respond to incoming calls with a simple text message."""
     global index
-    client = TwilioRestClient(account_sid, auth_token)
+
+    print "next"
 
     f = open('numbers.txt', 'r')
     numbers = f.read().split()
-    print numbers
     f.close()
 
 
@@ -82,6 +82,24 @@ def nextInQueue():
 
     if index >= len(numbers):
       index=0
+
+    send()
+
+    return "Sent to "+numbers[index]
+
+
+@app.route("/resend", methods=['GET', 'POST'])
+def send():
+    """Respond to incoming calls with a simple text message."""
+    global index
+
+    print "resend"
+    client = TwilioRestClient(account_sid, auth_token)
+
+    f = open('numbers.txt', 'r')
+    numbers = f.read().split()
+    print numbers
+    f.close()
 
 
     print numbers[index]
