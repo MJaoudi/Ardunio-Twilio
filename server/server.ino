@@ -42,8 +42,11 @@ IPAddress ip(128,122,81,246);
 EthernetServer server(80);
 
 const int micPin = A0;
-const int motorPin = 10;
+const int motorPin = 3;
+const int offPin= 8;
 boolean sweep = false;
+
+int spinVal=0;
 
 void setup() {
  // Open serial communications and wait for port to open:
@@ -60,14 +63,22 @@ void setup() {
 void loop() {
   
   int micVal = analogRead(micPin);
-  Serial.println(micVal);
-  if(micVal > 550) {
-    sweep = true;
-    Serial.println("ON");
+  analogWrite(motorPin,spinVal); 
+  //Serial.println(micVal);
+  if(micVal > 540) {
+    Serial.println(micVal);
+    spinVal= 255;
+    //Serial.println("ON");
   }
-  if(sweep == true) {
-     digitalWrite(motorPin,HIGH); 
-  }
+ 
+  int offVal= digitalRead(offPin);
+  if (offVal == HIGH)
+   {
+         Serial.println("OFF");
+
+     spinVal=0;
+   }
+  
   // listen for incoming clients
   EthernetClient client = server.available();
   //Serial.println("in loop");
