@@ -44,8 +44,11 @@ def recieveMessage():
           message = fromNum +" has been added to the queue"
 
     elif "remove" in words[0]:
-      if len(numbers) == 1:
-          message = "Please text \"Remove + <number to remove>\""
+      if len(words) == 1:
+          if len([numbers.remove(x) for x in numbers if fromNum in x]) > 0:
+            message = fromNum + " has been removed from the queue"
+          else:
+            message = words[1] + " is not in the queue"
       elif fromNum in numbers:
           if len([numbers.remove(x) for x in numbers if fromNum in x]) > 0:
             message = words[1] + " has been removed from the queue"

@@ -25,17 +25,18 @@
 #include <SPI.h>
 #include <Ethernet.h>
 
-const int threshold = 570;
+const int threshold = 600;
 const int micPin = A0;
-const int motorPin = 5;
+const int motorPin = 3;
+
 const int switchPin = A1;
 int switchVal = 0;
 int micVal = 0;
 int motorVal = 0;
 int resendCounter = 0;
 boolean running = false;
-String site = "3i4t.localtunnel.com";
-
+  String site = "4mse.localtunnel.com";
+  
 // Enter a MAC address for your controller below.
 // Newer Ethernet shields have a MAC address printed on a sticker on the shield
 byte mac[] = {  
@@ -43,11 +44,11 @@ byte mac[] = {
 // if you don't want to use DNS (and reduce your sketch size)
 // use the numeric IP instead of the name for the server:
 //IPAddress server(74,125,232,128);  // numeric IP for Google (no DNS)
-char server[] = "3i4t.localtunnel.com";    
+char server[] = "4mse.localtunnel.com";    
 // name address for Google (using DNS)
 
 // Set the static IP address to use if the DHCP fails to assign
-IPAddress ip(128,122,81,246);
+IPAddress ip(128,122,81,240);
 
 // Initialize the Ethernet client library
 // with the IP address and port of the server 
@@ -99,6 +100,7 @@ void loop()
   micVal = analogRead(micPin);
   switchVal = digitalRead(switchPin);
   Serial.println(micVal);
+  //if the system is not already on and the micVal = 
   if(!activated && (micVal > threshold)) {
     Serial.println("activated");
     activated = true;

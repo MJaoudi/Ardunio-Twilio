@@ -34,7 +34,7 @@
 // The IP address will be dependent on your local network:
 byte mac[] = {  
    0x58, 0xB0, 0x35, 0x71, 0x51, 0x60};
-IPAddress ip(128,122,81,246);
+IPAddress ip(128,122,81,240);
 
 // Initialize the Ethernet server library
 // with the IP address and port you want to use 
@@ -76,7 +76,7 @@ void loop() {
    {
          Serial.println("OFF");
 
-     spinVal=0;
+    // spinVal=0;
    }
   
   // listen for incoming clients
